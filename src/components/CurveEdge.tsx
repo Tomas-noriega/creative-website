@@ -6,7 +6,7 @@ import {onFrame} from '../lib/scroll';
  * The top edge of a section, lifted like the dust sheet. While the section
  * rises into view its top bulges upward into the section above in a soft
  * curve, then flattens as it settles — every change of section is a curve
- * in, not a hard line. `color` is this section's own background; a brass
+ * in, not a hard line. `color` is this section's own background; a sea-glass
  * hairline traces the crest.
  */
 export function CurveEdge({color}: {color: string}) {
@@ -38,7 +38,7 @@ export function CurveEdge({color}: {color: string}) {
     <div ref={wrapRef} aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 z-10 h-[12vh] -translate-y-full">
       <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute inset-0 size-full overflow-visible">
         <path ref={fillRef} d="M0 100.5 Q50 -100 100 100.5 Z" fill={color} />
-        <path ref={lineRef} d="M0 100 Q50 -100 100 100" fill="none" stroke="var(--color-brass)" strokeWidth="1" vectorEffect="non-scaling-stroke" />
+        <path ref={lineRef} d="M0 100 Q50 -100 100 100" fill="none" stroke="var(--color-tide)" strokeWidth="1" vectorEffect="non-scaling-stroke" />
       </svg>
     </div>
   );

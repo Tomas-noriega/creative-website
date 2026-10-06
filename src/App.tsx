@@ -1,9 +1,9 @@
 import {useEffect} from 'react';
-import {Atelier} from './components/Atelier';
 import {Footer, Header} from './components/Chrome';
+import {Day} from './components/Day';
 import {Details} from './components/Details';
-import {Enquire} from './components/Enquire';
-import {Specs} from './components/Specs';
+import {Relaunch} from './components/Relaunch';
+import {Shop} from './components/Shop';
 import {Unveil} from './components/Unveil';
 import {useReducedMotion} from './hooks/useReducedMotion';
 import {startScroll} from './lib/scroll';
@@ -18,12 +18,12 @@ export default function App() {
       <main>
         <Unveil />
         <Details />
-        <Specs />
-        <Atelier />
-        <Enquire />
+        <Day />
+        <Relaunch />
+        <Shop />
       </main>
       <Footer />
-      {/* Projected-film grain over everything. */}
+      {/* A fine grain over everything, like a printed lookbook. */}
       <div aria-hidden="true" className="grain-overlay" />
     </>
   );

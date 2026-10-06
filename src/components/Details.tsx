@@ -1,19 +1,19 @@
 import {useEffect, useRef, useState} from 'react';
-import {details} from '../content';
+import {details, hero} from '../content';
 import {clamp, easeOutCubic, lerp, pinProgress, range, smoothstep} from '../lib/math';
 import {onFrame, scrollToY} from '../lib/scroll';
 
 /**
- * The exhibit tour. The revealed car fills the screen and the scroll works
- * the camera: it pushes in on each detail, holds, then eases out, travels
- * and eases back in to the next — a pull-back curve between every stop, the
- * way a camera operator would do it. A reticle locks on at each stop, a
- * leader line runs to the close-up card, and the card crossfades.
+ * The detail tour. The half-zip sits on the studio backdrop and the scroll
+ * works the camera: it pushes in on each detail, holds, then eases out,
+ * travels and eases back in to the next — a pull-back curve between every
+ * stop. A reticle locks on at each stop, a leader line runs to the
+ * close-up card, and the card crossfades.
  */
 
-const SECTION_VH = 520;
-const IMG = {w: 2400, h: 1361};
-const ZOOM = 2.3;
+const SECTION_VH = 480;
+const IMG = {w: 1500, h: 1500};
+const ZOOM = 2.6;
 
 export function Details() {
   const rootRef = useRef<HTMLElement>(null);
@@ -27,6 +27,7 @@ export function Details() {
 
   useEffect(() => {
     let lastP = -1;
+    let lastW = -1;
     let current = 0;
     return onFrame(() => {
       const root = rootRef.current;
@@ -39,17 +40,19 @@ export function Details() {
 
       const vw = window.innerWidth;
       const wide = vw >= 768;
-      // Cover-fit the photograph to the screen.
-      const s0 = Math.max(vw / IMG.w, vh / IMG.h);
-      const w = IMG.w * s0;
-      const h = IMG.h * s0;
-      const ox = (vw - w) / 2;
-      const oy = (vh - h) / 2;
+      // Contain-fit the photograph beside the card (above it on phones).
+      const w = wide ? Math.min(vh * 0.9, vw * 0.6) : Math.min(vw * 0.95, vh * 0.55);
+      const h = (w * IMG.h) / IMG.w;
+      if (w !== lastW) {
+        plate.style.width = `${w}px`;
+        lastW = w;
+      }
 
       // Where a detail should land on screen while held.
       const target = wide ? {x: vw * 0.36, y: vh * 0.5} : {x: vw * 0.5, y: vh * 0.34};
+      const centre = {x: w / 2, y: h / 2};
 
-      // u runs -1 (wide) → 0..n-1 (stops) → n (wide again).
+      // u runs -0.6 (whole garment) → 0..n-1 (stops) → n-0.4 (whole again).
       const u = lerp(-0.6, n - 0.4, range(p, 0.02, 0.98));
       const hot = (i: number) => {
         const d = details.items[clamp(i, 0, n - 1)];
@@ -61,20 +64,19 @@ export function Details() {
       let fy: number;
       let lock: number; // 0–1, how settled on a stop we are
       if (u <= 0) {
-        // Push in from the full frame to the first stop.
+        // Push in from the whole garment to the first stop.
         const k = smoothstep(clamp(u / 0.6 + 1));
         scale = lerp(1, ZOOM, k);
         const a = hot(0);
-        // At scale 1 the plate sits at (ox, oy) when the focal is target − o.
-        fx = lerp(target.x - ox, a.x, k);
-        fy = lerp(target.y - oy, a.y, k);
+        fx = lerp(centre.x, a.x, k);
+        fy = lerp(centre.y, a.y, k);
         lock = range(k, 0.8, 1);
       } else if (u >= n - 1) {
         const k = smoothstep(clamp((u - (n - 1)) / 0.6));
         scale = lerp(ZOOM, 1, k);
         const a = hot(n - 1);
-        fx = lerp(a.x, target.x - ox, k);
-        fy = lerp(a.y, target.y - oy, k);
+        fx = lerp(a.x, centre.x, k);
+        fy = lerp(a.y, centre.y, k);
         lock = 1 - range(k, 0, 0.2);
       } else {
         const i = Math.floor(u);
@@ -85,7 +87,7 @@ export function Details() {
         fx = lerp(a.x, b.x, travel);
         fy = lerp(a.y, b.y, travel);
         // The curve: ease out to a wider shot mid-travel, ease back in.
-        scale = ZOOM - Math.sin(travel * Math.PI) * (ZOOM - 1.35);
+        scale = ZOOM - Math.sin(travel * Math.PI) * (ZOOM - 1.4);
         lock = 1 - Math.sin(travel * Math.PI);
       }
 
@@ -114,7 +116,7 @@ export function Details() {
       line.setAttribute('y2', String(wide ? cr.top + 24 : cr.top - 12));
       line.style.strokeDashoffset = String(1 - rk);
       card.style.opacity = String(0.25 + rk * 0.75);
-      shadeRef.current!.style.opacity = String(0.35 + rk * 0.35);
+      shadeRef.current!.style.opacity = String(0.5 + rk * 0.4);
     });
   }, [n]);
 
@@ -122,37 +124,36 @@ export function Details() {
   const goTo = (i: number) => {
     const root = rootRef.current;
     if (!root) return;
-    const u = i;
-    const p = lerp(0.02, 0.98, (u + 0.6) / (n - 0.4 + 0.6));
+    const p = lerp(0.02, 0.98, (i + 0.6) / (n - 0.4 + 0.6));
     scrollToY(root.offsetTop + p * (root.offsetHeight - window.innerHeight), false);
   };
 
   const item = details.items[active];
 
   return (
-    <section ref={rootRef} id="details" aria-labelledby="details-title" className="relative bg-ink" style={{height: `${SECTION_VH}svh`}}>
+    <section ref={rootRef} id="details" aria-labelledby="details-title" className="relative bg-fog text-ink" style={{height: `${SECTION_VH}svh`}}>
       <div className="sticky top-0 h-screen-s overflow-hidden">
-        <div ref={plateRef} className="absolute top-0 left-0 origin-top-left will-change-transform" style={{width: 'max(100vw, calc(100svh * 2400 / 1361))'}}>
-          <img src={`${import.meta.env.BASE_URL}media/revealed.webp`} alt="The Valmora Alba GT in the museum hall." width={IMG.w} height={IMG.h} decoding="async" className="block h-auto w-full" />
+        <div ref={plateRef} className="absolute top-0 left-0 origin-top-left will-change-transform">
+          <img src={hero.image} alt="The Wellfleet ½ Zip, laid flat." width={IMG.w} height={IMG.h} decoding="async" className="block h-auto w-full" />
         </div>
-        <div ref={shadeRef} aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,transparent_45%,rgb(12_11_10/0.85)_78%)] max-md:bg-[linear-gradient(180deg,transparent_45%,rgb(12_11_10/0.9)_70%)]" />
+        <div ref={shadeRef} aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,transparent_50%,rgb(243_243_243/0.92)_74%)] max-md:bg-[linear-gradient(180deg,transparent_50%,rgb(243_243_243/0.95)_66%)]" />
 
         {/* Reticle. */}
         <div ref={reticleRef} aria-hidden="true" className="pointer-events-none absolute size-14" style={{opacity: 0}}>
-          <span className="absolute inset-0 rounded-full border border-chalk/80" />
-          <span className="absolute inset-[38%] rounded-full bg-chalk shadow-[0_0_18px_rgb(241_236_227/0.9)]" />
+          <span className="absolute inset-0 rounded-full border border-chalk/90" />
+          <span className="absolute inset-[38%] rounded-full bg-buoy shadow-[0_0_18px_rgb(215_95_54/0.9)]" />
           {[0, 90, 180, 270].map((d) => (
             <span key={d} className="absolute top-1/2 left-1/2 h-px w-3 origin-left bg-chalk" style={{transform: `rotate(${d}deg) translateX(30px)`}} />
           ))}
         </div>
         <svg aria-hidden="true" className="pointer-events-none absolute inset-0 size-full">
-          <line ref={leaderRef} pathLength={1} stroke="var(--color-brass)" strokeWidth="1" strokeDasharray="1 1" strokeDashoffset="1" />
+          <line ref={leaderRef} pathLength={1} stroke="var(--color-buoy)" strokeWidth="1" strokeDasharray="1 1" strokeDashoffset="1" />
         </svg>
 
         {/* Heading. */}
-        <div className="absolute top-[5.5rem] left-4 sm:left-6 md:top-28 md:left-[4vw]">
-          <p className="font-mono text-label text-brass uppercase">{details.eyebrow}</p>
-          <h2 id="details-title" className="wide mt-3 max-w-[16ch] font-display text-[clamp(1.5rem,2.8vw,2.75rem)] leading-none font-extralight uppercase [text-shadow:0_2px_24px_rgb(0_0_0/0.6)]">
+        <div className="absolute top-[5.5rem] left-4 z-10 -ml-3 rounded-[8px] bg-fog/85 px-3 py-2 backdrop-blur-md sm:left-6 md:top-28 md:left-[4vw] md:-ml-4 md:px-4 md:py-3">
+          <p className="font-mono text-label text-tide-deep uppercase">{details.eyebrow}</p>
+          <h2 id="details-title" className="wide mt-3 max-w-[16ch] font-display text-[clamp(1.5rem,2.8vw,2.75rem)] leading-none font-extralight uppercase [text-shadow:0_2px_24px_rgb(243_243_243/0.9)]">
             {details.heading}
           </h2>
         </div>
@@ -161,16 +162,16 @@ export function Details() {
         <div ref={cardRef} className="absolute inset-x-4 bottom-20 sm:inset-x-6 md:inset-x-auto md:top-1/2 md:right-[4vw] md:bottom-auto md:w-[min(24rem,30vw)] md:-translate-y-1/2">
           <div key={item.id} className="animate-[fade-up_0.8s_cubic-bezier(0.2,0.7,0.1,1)]">
             <div className="flex items-baseline gap-4">
-              <span className="wide font-display text-[clamp(3rem,6vw,5.5rem)] leading-none font-extralight text-transparent" style={{WebkitTextStroke: '1px var(--color-brass)'}}>
+              <span className="wide font-display text-[clamp(3rem,6vw,5.5rem)] leading-none font-extralight text-transparent" style={{WebkitTextStroke: '1px var(--color-buoy)'}}>
                 {item.label}
               </span>
-              <span className="font-mono text-label text-chalk/50 uppercase">/ 0{n}</span>
+              <span className="font-mono text-label text-ink/50 uppercase">/ 0{n}</span>
             </div>
-            <div className="mt-4 overflow-hidden rounded-[4px] max-md:hidden">
+            <div className="mt-4 overflow-hidden rounded-[6px] max-md:hidden">
               <img src={item.image} alt={item.title} width={900} height={900} decoding="async" className="aspect-[4/3] w-full animate-[settle_1.8s_cubic-bezier(0.2,0.7,0.1,1)] object-cover" />
             </div>
             <h3 className="wide mt-5 font-display text-[1.375rem] font-light uppercase md:text-[1.625rem]">{item.title}</h3>
-            <p className="mt-2 text-body text-chalk/75">{item.body}</p>
+            <p className="mt-2 text-body text-ink/75">{item.body}</p>
           </div>
         </div>
 
@@ -178,8 +179,8 @@ export function Details() {
         <nav aria-label="Details" className="absolute bottom-6 left-4 flex gap-5 sm:left-6 md:left-[4vw]">
           {details.items.map((d, i) => (
             <button key={d.id} type="button" onClick={() => goTo(i)} aria-current={i === active ? 'true' : undefined} className="group text-left">
-              <span className={`block h-px w-12 transition-colors duration-500 md:w-20 ${i === active ? 'bg-brass' : 'bg-chalk/25 group-hover:bg-chalk/60'}`} />
-              <span className={`mt-2 block font-mono text-[0.625rem] tracking-[0.14em] uppercase transition-colors ${i === active ? 'text-chalk' : 'text-chalk/45'}`}>{d.label}</span>
+              <span className={`block h-px w-12 transition-colors duration-500 md:w-20 ${i === active ? 'bg-buoy' : 'bg-ink/25 group-hover:bg-ink/60'}`} />
+              <span className={`mt-2 block font-mono text-[0.625rem] tracking-[0.14em] uppercase transition-colors ${i === active ? 'text-ink' : 'text-ink/45'}`}>{d.label}</span>
             </button>
           ))}
         </nav>

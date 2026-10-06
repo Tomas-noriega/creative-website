@@ -50,7 +50,7 @@ export function Marquee({text}: {text: string}) {
           <span
             key={k}
             className="wide pr-[0.4em] font-display text-[clamp(4rem,13vw,13rem)] leading-none font-extralight whitespace-nowrap text-transparent uppercase"
-            style={{WebkitTextStroke: '1px rgb(201 163 106 / 0.55)'}}
+            style={{WebkitTextStroke: '1px rgb(143 193 181 / 0.55)'}}
           >
             {text}
           </span>

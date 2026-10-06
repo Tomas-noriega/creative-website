@@ -1,32 +1,34 @@
 /**
- * Every word on the page. VALMORA is a concept marque — the car, its specs
- * and its history are illustrative, and the footer says so.
+ * Every word on the page. A student relaunch concept for the Google
+ * Wellfleet Women's 1/2 Zip — not affiliated with Google, and the footer
+ * says so. Product facts come from the Google Merch Shop listing.
  */
 
 /** public/ files live under the deploy base (GitHub Pages serves a subpath). */
 const BASE = import.meta.env.BASE_URL;
 
 export const brand = {
-  name: 'Valmora',
-  wordmark: 'VALMORA',
-  tagline: ['A classic grand tourer', 'built as if 1961 never ended'],
-  email: 'atelier@valmora.it',
+  name: 'Wellfleet',
+  wordmark: 'WELLFLEET',
+  tagline: ['The Google Wellfleet Women’s ½ Zip', 'office to ocean'],
+  price: '$79',
+  shopUrl: 'https://shop.merch.google/product/google-wellfleet-womens-1-2-zip-ggoegxxx2633',
 };
 
 export const nav = [
-  {label: 'Design', href: '#details'},
-  {label: 'Specification', href: '#specs'},
-  {label: 'Atelier', href: '#atelier'},
+  {label: 'Details', href: '#details'},
+  {label: 'A day in it', href: '#day'},
+  {label: 'Your size', href: '#relaunch'},
 ];
 
-export const unveil = {
-  title: ['Rediscover', 'the classics'],
-  body: 'A grand tourer that spent sixty years under a dust sheet — and came out exactly as it was meant to be.',
-  handle: 'Drag to reveal',
-  model: ['Valmora', 'Alba GT'],
-  year: '1961',
-  slogan: ['Looks fast', 'standing still'],
-  note: 'Coachbuilt by hand in Modena. Twelve cars, each a year in the making.',
+export const hero = {
+  image: `${BASE}media/halfzip.jpg`,
+  title: ['Made for', 'the Cape morning'],
+  body: 'A soft, structured half-zip for the woman whose day starts on the beach and ends on a video call — and back again.',
+  handle: 'Pull the sheet',
+  model: ['Google Wellfleet', 'Women’s ½ Zip'],
+  slogan: ['Office to', 'ocean'],
+  note: 'Premium spacer yarn, light insulation, UV protection and odor control. One layer, all day.',
 };
 
 export type Detail = {
@@ -34,49 +36,52 @@ export type Detail = {
   label: string;
   title: string;
   body: string;
-  /** Hotspot position over the revealed photograph, as % of its box. */
+  /** Hotspot position over the product photograph, as % of its box. */
   x: number;
   y: number;
   image: string;
 };
 
 export const details: {eyebrow: string; heading: string; items: Detail[]} = {
-  eyebrow: 'Design',
-  heading: 'Every line drawn once.',
+  eyebrow: 'Details',
+  heading: 'Built for the wind off the bay.',
   items: [
-    {id: 'lamp', label: '01', title: 'Crystal headlamps', body: 'Hand-blown glass over polished reflector bowls. They warm up slowly, like a valve amplifier.', x: 77.2, y: 60.8, image: `${BASE}media/details/lamp.webp`},
-    {id: 'wheel', label: '02', title: '72-spoke wire wheels', body: 'Laced and trued by one craftsman. Centre-lock knock-offs, chromed three times.', x: 49.2, y: 70.6, image: `${BASE}media/details/wheel.webp`},
-    {id: 'cabin', label: '03', title: 'Quilted cabin', body: 'Cream Connolly-style hide, walnut and a wood-rim wheel. The clock is wound by hand.', x: 44.4, y: 49.5, image: `${BASE}media/details/cabin.webp`},
-    {id: 'vent', label: '04', title: 'Wing vents', body: 'Three chrome strakes that let the V12 breathe — and catch every light in the room.', x: 41.8, y: 60.4, image: `${BASE}media/details/vent.webp`},
+    {id: 'collar', label: '01', title: 'Stand collar', body: 'Zip it up against a 50° sea breeze. Fold it open and it reads crisp on camera at 9 a.m.', x: 48, y: 13, image: `${BASE}media/collar.jpg`},
+    {id: 'zip', label: '02', title: 'The half-zip', body: 'Vent it on the climb over the dunes, close it when the fog rolls in. No pulling a sweater over your hair.', x: 43.3, y: 49, image: `${BASE}media/zip.jpg`},
+    {id: 'yarn', label: '03', title: 'Spacer yarn', body: 'A knit with air built into it: soft structure that holds its shape and light insulation that never feels bulky.', x: 54.7, y: 38, image: `${BASE}media/logo.jpg`},
+    {id: 'cuff', label: '04', title: 'Ribbed cuffs', body: 'Push the sleeves up for the boardwalk, and they stay put. Pull them down when the sun drops.', x: 10, y: 78, image: `${BASE}media/cuff.jpg`},
   ],
 };
 
-export const specs = {
-  eyebrow: 'Specification',
-  heading: 'Numbers from another time.',
-  note: 'Concept figures — illustrative.',
+/** A day in the half-zip — hours on a 24h clock. */
+export const day = {
+  eyebrow: 'A day in it',
+  heading: 'One layer, sunrise to supper.',
+  note: 'Illustrative day on Cape Cod.',
+  start: 6,
+  end: 22,
   items: [
-    {value: 3.0, decimals: 1, unit: 'L', label: 'Naturally aspirated V12'},
-    {value: 286, decimals: 0, unit: 'hp', label: 'at 7,200 rpm'},
-    {value: 6.1, decimals: 1, unit: 's', label: '0–100 km/h'},
-    {value: 248, decimals: 0, unit: 'km/h', label: 'Top speed'},
-    {value: 1180, decimals: 0, unit: 'kg', label: 'Dry weight'},
-    {value: 12, decimals: 0, unit: '', label: 'Cars, ever'},
+    {at: 6.5, label: 'Sunrise walk, Newcomb Hollow Beach', benefit: 'Light insulation'},
+    {at: 9, label: 'Team stand-up, camera on', benefit: 'Polished structure'},
+    {at: 12.5, label: 'Lunch on the harbor deck', benefit: 'UV protection'},
+    {at: 17.5, label: 'Bike ride along the rail trail', benefit: 'Odor control'},
+    {at: 20, label: 'Oysters in town, collar up', benefit: 'Soft and warm'},
   ],
 };
 
-export const atelier = {
-  eyebrow: 'The atelier',
-  heading: ['Coachbuilt,', 'not manufactured.'],
+export const relaunch = {
+  eyebrow: 'The relaunch',
+  heading: ['Same half-zip,', 'finally in your size.'],
   steps: [
-    {n: '1,400', label: 'hours of hand-beaten aluminium', image: `${BASE}media/atelier/front.webp`},
-    {n: '11', label: 'coats of oxblood, rubbed back by hand', image: `${BASE}media/atelier/rear.webp`},
+    {n: 'XS–2XL', label: 'the full women’s size run, back in stock', image: `${BASE}media/collar.jpg`},
+    {n: '$0', label: 'shipping and returns — try it on at home', image: `${BASE}media/halfzip.jpg`},
   ],
 };
 
-export const enquire = {
-  eyebrow: 'Private viewing',
-  heading: ['The sheet comes off', 'once a month.'],
-  body: 'Viewings are held in the museum hall in Modena, by appointment. Tell us who you are and we’ll send an invitation.',
-  editions: ['Alba GT — Coupé', 'Alba GT — Spider (2027)', 'Just a viewing'],
+export const shop = {
+  eyebrow: 'Find your fit',
+  heading: ['Your Cape morning', 'starts at $79.'],
+  body: 'Tell us your usual size and how you like a layer to sit. We’ll tell you which Wellfleet to order.',
+  sizes: ['XS', 'S', 'M', 'L', 'XL', '2XL'],
+  fits: ['Relaxed, over a tee', 'Trim, under a jacket'],
 };

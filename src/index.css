@@ -25,16 +25,16 @@ html.lenis body {
   --font-sans: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono: "Geist Mono", ui-monospace, Menlo, monospace;
 
-  /* Sampled off the renders. */
-  --color-ink: #0c0b0a;
-  --color-ink-2: #15130f;
-  --color-stone: #635b54;
-  --color-slate: #414e5d;
-  --color-oxblood: #6e1620;
-  --color-oxblood-lit: #a3303a;
-  --color-linen: #e6dcc8;
-  --color-brass: #c9a36a;
-  --color-chalk: #f1ece3;
+  /* Sampled off the product shot and a Cape Cod morning. */
+  --color-ink: #151b30; /* the half-zip's navy */
+  --color-ink-2: #1c2440;
+  --color-fog: #f3f3f3; /* the studio backdrop */
+  --color-sand: #ece4d4;
+  --color-tide: #8fc1b5; /* sea glass, on navy */
+  --color-tide-deep: #2f6f64; /* sea glass, on light */
+  --color-buoy: #d75f36;
+  --color-buoy-deep: #b24a26;
+  --color-chalk: #f6f3ec;
 
   --text-hero: clamp(2.5rem, 6.4vw, 6.5rem);
   --text-hero--line-height: 0.92;
@@ -72,11 +72,11 @@ html.lenis body {
     overflow-x: clip;
   }
   ::selection {
-    background: var(--color-oxblood-lit);
-    color: var(--color-chalk);
+    background: var(--color-tide);
+    color: var(--color-ink);
   }
   :focus-visible {
-    outline: 1.5px solid var(--color-brass);
+    outline: 1.5px solid var(--color-buoy);
     outline-offset: 3px;
     border-radius: 4px;
   }
@@ -138,7 +138,7 @@ html.lenis body {
   inset: -50%;
   z-index: 55;
   pointer-events: none;
-  opacity: 0.07;
+  opacity: 0.05;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   animation: grain 0.5s steps(3) infinite;
 }
