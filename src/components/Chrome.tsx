@@ -10,19 +10,19 @@ function go(e: MouseEvent<HTMLAnchorElement>, then?: () => void) {
   scrollToHash(hash);
 }
 
-/** The mark: a wave over the horizon line. */
+/** The mark: the camera-frame corners from the app icon, around a rep dot. */
 function Mark({className = ''}: {className?: string}) {
   return (
-    <svg viewBox="0 0 28 20" aria-hidden="true" className={className} fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round">
-      <path d="M2 9c3-4 6-4 8 0s5 4 8 0 6-4 8 0" />
-      <path d="M2 16h24" opacity="0.55" />
+    <svg viewBox="0 0 28 20" aria-hidden="true" className={className} fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+      <path d="M3 6V2h4M21 2h4v4M25 14v4h-4M7 18H3v-4" />
+      <circle cx="14" cy="10" r="2.2" fill="currentColor" stroke="none" />
     </svg>
   );
 }
 
 /**
- * A thin top rail: mark + tagline left, links right. It runs over the fog,
- * the navy and the sand, so the rail inverts whatever is under it.
+ * A thin top rail: mark + tagline left, links right. It runs over chalk,
+ * black and yellow, so the rail inverts whatever is under it.
  */
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -47,7 +47,7 @@ export function Header() {
             </a>
           ))}
           <a href="#shop" onClick={(e) => go(e)} className="hidden font-mono text-[0.625rem] tracking-[0.16em] text-white uppercase underline-offset-4 hover:underline sm:block">
-            Shop {brand.price}
+            {brand.ctaShort}
           </a>
           <button type="button" onClick={() => setOpen((v) => !v)} aria-expanded={open} aria-controls="menu" aria-label={open ? 'Close menu' : 'Open menu'} className="flex h-8 w-8 flex-col items-end justify-center gap-[5px]">
             <span className={`h-px bg-white transition-all duration-300 ${open ? 'w-6 translate-y-[3px] rotate-45' : 'w-6'}`} />
@@ -56,7 +56,7 @@ export function Header() {
         </nav>
       </div>
       <div id="menu" inert={!open} className={`fixed inset-0 -z-10 flex flex-col justify-center gap-4 bg-ink/96 px-6 text-chalk backdrop-blur-xl transition-opacity duration-500 md:px-[4vw] ${open ? 'opacity-100' : 'pointer-events-none opacity-0'}`}>
-        {[...nav, {label: `Shop ${brand.price}`, href: '#shop'}].map((item, i) => (
+        {[...nav, {label: brand.ctaShort, href: '#shop'}].map((item, i) => (
           <a key={item.href} href={item.href} onClick={(e) => go(e, () => setOpen(false))} className="group flex items-baseline gap-5">
             <span className="font-mono text-label text-tide">0{i + 1}</span>
             <span className="wide font-display text-[clamp(2rem,6vw,5rem)] leading-none font-extralight uppercase transition-transform duration-500 group-hover:translate-x-3">
@@ -75,11 +75,16 @@ export function Footer() {
       <div className="flex flex-col gap-4 border-t border-chalk/10 pt-8 font-mono text-[0.625rem] tracking-[0.14em] text-chalk/50 uppercase md:flex-row md:items-center md:justify-between">
         <span className="flex items-center gap-2.5 text-chalk/80">
           <Mark className="h-3 w-5 text-tide" />
-          {brand.wordmark} · a student relaunch concept
+          {brand.wordmark} · a student marketing venture
         </span>
-        <span className="max-w-[40rem] md:text-center">Class marketing project · Not affiliated with or endorsed by Google · Product photos: Google Merch Shop</span>
+        <span className="max-w-[40rem] md:text-center">
+          MKTG 1101 · Fairfield University · iOS app concept by{' '}
+          <a href={brand.founderUrl} target="_blank" rel="noopener" className="underline underline-offset-4 hover:text-chalk">
+            Tomas Noriega
+          </a>
+        </span>
         <a href="#top" onClick={(e) => go(e)} className="hover:text-chalk">
-          Back under the sheet ↑
+          Back to the top ↑
         </a>
       </div>
     </footer>

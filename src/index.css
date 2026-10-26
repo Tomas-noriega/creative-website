@@ -25,16 +25,16 @@ html.lenis body {
   --font-sans: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono: "Geist Mono", ui-monospace, Menlo, monospace;
 
-  /* Sampled off the product shot and a Cape Cod morning. */
-  --color-ink: #151b30; /* the half-zip's navy */
-  --color-ink-2: #1c2440;
-  --color-fog: #f3f3f3; /* the studio backdrop */
-  --color-sand: #ece4d4;
-  --color-tide: #8fc1b5; /* sea glass, on navy */
-  --color-tide-deep: #2f6f64; /* sea glass, on light */
-  --color-buoy: #d75f36;
-  --color-buoy-deep: #b24a26;
-  --color-chalk: #f6f3ec;
+  /* Sampled off the Reel Lifts app icon: gym-floor black and camera-frame yellow. */
+  --color-ink: #0e0e10; /* near black */
+  --color-ink-2: #17171b;
+  --color-fog: #f2f0ea; /* lifting chalk */
+  --color-sand: #ffd21f; /* the brand yellow, as a surface */
+  --color-tide: #ffd21f; /* yellow, on black */
+  --color-tide-deep: #7a5c00; /* deep gold, on light */
+  --color-buoy: #ffc400; /* bright accent: reticle, dots */
+  --color-buoy-deep: #0e0e10; /* solid buttons */
+  --color-chalk: #f4f2ec;
 
   --text-hero: clamp(2.5rem, 6.4vw, 6.5rem);
   --text-hero--line-height: 0.92;

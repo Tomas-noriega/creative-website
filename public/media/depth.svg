@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="750 0 750 750" width="1200" height="1200"><defs><pattern id="g" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M50 0H0V50" fill="none" stroke="#ffffff08" stroke-width="2"/></pattern></defs><rect x="-10" y="-10" width="1520" height="1520" fill="#0E0E10"/><rect width="1500" height="1500" fill="url(#g)"/><rect x="24" y="24" width="702" height="702" rx="34" fill="#18181C"/><text x="70" y="92" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="26" font-weight="600" fill="#FFD21F" text-anchor="start" letter-spacing="4">01 · BAR PATH</text>
+<path d="M110 176V130H156 M594 130H640V176 M640 624V670H594 M156 670H110V624" fill="none" stroke="#FFD21F" stroke-width="7" stroke-linecap="round"/>
+<line x1="150" y1="610" x2="600" y2="610" stroke="#2c2c33" stroke-width="4"/>
+<path d="M375.0 560.0 L378.0 550.5 L381.0 541.0 L383.8 531.5 L386.5 522.0 L389.0 512.5 L391.3 503.0 L393.3 493.5 L395.0 484.0 L396.3 474.5 L397.2 465.0 L397.8 455.5 L397.9 446.0 L397.7 436.5 L397.0 427.0 L396.0 417.5 L394.5 408.0 L392.7 398.5 L390.5 389.0 L388.0 379.5 L385.3 370.0 L382.3 360.5 L379.1 351.0 L375.7 341.5 L372.3 332.0 L368.8 322.5 L365.2 313.0 L361.8 303.5 L358.4 294.0 L355.2 284.5 L352.2 275.0 L349.5 265.5 L347.0 256.0 L344.8 246.5 L343.0 237.0 L341.5 227.5 L340.5 218.0 L339.8 208.5 L339.6 199.0 L339.7 189.5 L340.3 180.0" fill="none" stroke="#FFD21F" stroke-width="7" stroke-dasharray="2 16" stroke-linecap="round"/>
+<circle cx="375.0" cy="560.0" r="9" fill="#FFD21F"/>
+<circle cx="395.0" cy="484.0" r="9" fill="#FFD21F"/>
+<circle cx="394.5" cy="408.0" r="9" fill="#FFD21F"/>
+<circle cx="372.3" cy="332.0" r="9" fill="#FFD21F"/>
+<circle cx="347.0" cy="256.0" r="9" fill="#FFD21F"/>
+<circle cx="340.3" cy="180.0" r="9" fill="#FFD21F"/>
+<circle cx="375" cy="560" r="62" fill="#111" stroke="#F4F2EC" stroke-width="6"/>
+<circle cx="375" cy="560" r="14" fill="#FFD21F"/>
+<line x1="375" y1="180" x2="375" y2="600" stroke="#F4F2EC22" stroke-width="2" stroke-dasharray="8 10"/>
+<text x="470" y="300" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#9A9AA2" text-anchor="start" letter-spacing="0">Drift</text>
+<text x="470" y="342" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="40" font-weight="600" fill="#F4F2EC" text-anchor="start" letter-spacing="0">1.8 in</text>
+<text x="470" y="420" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#9A9AA2" text-anchor="start" letter-spacing="0">Speed</text>
+<text x="470" y="462" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="40" font-weight="600" fill="#F4F2EC" text-anchor="start" letter-spacing="0">0.42 m/s</text>
+<rect x="774" y="24" width="702" height="702" rx="34" fill="#18181C"/><text x="820" y="92" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="26" font-weight="600" fill="#FFD21F" text-anchor="start" letter-spacing="4">02 · DEPTH</text>
+<line x1="1160" y1="600" x2="1220" y2="440" stroke="#F4F2EC" stroke-width="20" stroke-linecap="round"/>
+<line x1="1220" y1="440" x2="1040" y2="452" stroke="#F4F2EC" stroke-width="20" stroke-linecap="round"/>
+<line x1="1040" y1="452" x2="1170" y2="290" stroke="#F4F2EC" stroke-width="20" stroke-linecap="round"/>
+<circle cx="1220" cy="235" r="32" fill="#F4F2EC"/>
+<line x1="1170" y1="290" x2="1210" y2="320" stroke="#F4F2EC" stroke-width="14" stroke-linecap="round"/>
+<line x1="1000" y1="284" x2="1340" y2="284" stroke="#F4F2EC" stroke-width="10" stroke-linecap="round"/>
+<rect x="982" y="220" width="26" height="128" rx="8" fill="#F4F2EC"/>
+<rect x="1332" y="220" width="26" height="128" rx="8" fill="#F4F2EC"/>
+<line x1="1100" y1="610" x2="1250" y2="610" stroke="#2c2c33" stroke-width="4"/>
+<circle cx="1040" cy="452" r="14" fill="#FFD21F"/>
+<circle cx="1220" cy="440" r="14" fill="#FFD21F"/>
+<line x1="880" y1="440" x2="1390" y2="440" stroke="#FFD21F" stroke-width="3" stroke-dasharray="14 10"/>
+<text x="880" y="422" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="22" font-weight="600" fill="#FFD21F" text-anchor="start" letter-spacing="3">PARALLEL</text>
+<rect x="860" y="640" width="300" height="56" rx="28" fill="#FFD21F"/>
+<text x="1010" y="677" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="22" font-weight="700" fill="#111" text-anchor="middle" letter-spacing="0">DEPTH ✓  hip below knee</text>
+<rect x="24" y="774" width="702" height="702" rx="34" fill="#18181C"/><text x="70" y="842" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="26" font-weight="600" fill="#FFD21F" text-anchor="start" letter-spacing="4">03 · MEAL PHOTO</text>
+<path d="M110 930V890H150 M400 890H440V930 M440 1180V1220H400 M150 1220H110V1180" fill="none" stroke="#FFD21F" stroke-width="7" stroke-linecap="round"/>
+<circle cx="275" cy="1055" r="146" fill="#26262c"/>
+<circle cx="275" cy="1055" r="130" fill="#ece9e1"/>
+<path d="M275 1055 L275.0 943.0 A112 112 0 0 1 331.0 1152.0 Z" fill="#c98a4b"/>
+<path d="M275 1055 L331.0 1152.0 A112 112 0 0 1 164.7 1035.6 Z" fill="#f2e6c8"/>
+<path d="M275 1055 L164.7 1035.6 A112 112 0 0 1 275.0 943.0 Z" fill="#5f9a4a"/>
+<text x="480" y="960" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="64" font-weight="700" fill="#F4F2EC" text-anchor="start" letter-spacing="0">610</text>
+<text x="480" y="996" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#9A9AA2" text-anchor="start" letter-spacing="0">kcal</text>
+<text x="480" y="1060" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#9A9AA2" text-anchor="start" letter-spacing="0">Protein</text>
+<text x="680" y="1060" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="26" font-weight="600" fill="#F4F2EC" text-anchor="end" letter-spacing="0">42 g</text>
+<text x="480" y="1108" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#9A9AA2" text-anchor="start" letter-spacing="0">Carbs</text>
+<text x="680" y="1108" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="26" font-weight="600" fill="#F4F2EC" text-anchor="end" letter-spacing="0">68 g</text>
+<text x="480" y="1156" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#9A9AA2" text-anchor="start" letter-spacing="0">Fat</text>
+<text x="680" y="1156" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="26" font-weight="600" fill="#F4F2EC" text-anchor="end" letter-spacing="0">17 g</text>
+<rect x="110" y="1280" width="530" height="12" rx="6" fill="#2c2c33"/>
+<rect x="110" y="1280" width="461" height="12" rx="6" fill="#FFD21F"/>
+<text x="110" y="1340" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="26" font-weight="600" fill="#F4F2EC" text-anchor="start" letter-spacing="0">AI confidence 87%</text>
+<text x="640" y="1340" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="26" font-weight="600" fill="#FFD21F" text-anchor="end" letter-spacing="0">Tap to fix</text>
+<rect x="774" y="774" width="702" height="702" rx="34" fill="#18181C"/><text x="820" y="842" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="26" font-weight="600" fill="#FFD21F" text-anchor="start" letter-spacing="4">04 · PR PLAN</text>
+<line x1="870" y1="950.0" x2="1370" y2="950.0" stroke="#2c2c33" stroke-width="2"/>
+<line x1="870" y1="1025.0" x2="1370" y2="1025.0" stroke="#2c2c33" stroke-width="2"/>
+<line x1="870" y1="1100.0" x2="1370" y2="1100.0" stroke="#2c2c33" stroke-width="2"/>
+<line x1="870" y1="1175.0" x2="1370" y2="1175.0" stroke="#2c2c33" stroke-width="2"/>
+<line x1="870" y1="1250.0" x2="1370" y2="1250.0" stroke="#2c2c33" stroke-width="2"/>
+<path d="M870 1250 L870.0 1212.5 L932.5 1212.5 L995.0 1175.0 L1057.5 1137.5 L1120.0 1137.5 L1182.5 1100.0 L1245.0 1062.5 L1307.5 1025.0 L1370.0 987.5 L1370 1250 Z" fill="#FFD21F" opacity="0.12"/>
+<path d="M870.0 1212.5 L932.5 1212.5 L995.0 1175.0 L1057.5 1137.5 L1120.0 1137.5 L1182.5 1100.0 L1245.0 1062.5 L1307.5 1025.0 L1370.0 987.5" fill="none" stroke="#FFD21F" stroke-width="6" stroke-linejoin="round"/>
+<circle cx="870.0" cy="1212.5" r="7" fill="#F4F2EC"/>
+<circle cx="932.5" cy="1212.5" r="7" fill="#F4F2EC"/>
+<circle cx="995.0" cy="1175.0" r="7" fill="#F4F2EC"/>
+<circle cx="1057.5" cy="1137.5" r="7" fill="#F4F2EC"/>
+<circle cx="1120.0" cy="1137.5" r="7" fill="#F4F2EC"/>
+<circle cx="1182.5" cy="1100.0" r="7" fill="#F4F2EC"/>
+<circle cx="1245.0" cy="1062.5" r="7" fill="#F4F2EC"/>
+<circle cx="1307.5" cy="1025.0" r="7" fill="#F4F2EC"/>
+<circle cx="1370.0" cy="987.5" r="20" fill="#FFD21F"/>
+<text x="1340.0" y="953.5" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="30" font-weight="700" fill="#FFD21F" text-anchor="end" letter-spacing="0">PR 315 lb</text>
+<text x="870" y="1296" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" font-weight="600" fill="#9A9AA2" text-anchor="start" letter-spacing="2">WEEK 1</text>
+<text x="1370" y="1296" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="20" font-weight="600" fill="#9A9AA2" text-anchor="end" letter-spacing="2">WEEK 9</text>
+<text x="870" y="1360" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="30" font-weight="600" fill="#F4F2EC" text-anchor="start" letter-spacing="0">Next: 3 × 3 at 295 lb</text>
+<text x="870" y="1406" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="26" font-weight="400" fill="#9A9AA2" text-anchor="start" letter-spacing="0">Eat 2,850 kcal · 180 g protein</text></svg>

@@ -1,11 +1,11 @@
 import {useEffect, useRef, useState} from 'react';
-import {details, hero} from '../content';
+import {details} from '../content';
 import {clamp, easeOutCubic, lerp, pinProgress, range, smoothstep} from '../lib/math';
 import {onFrame, scrollToY} from '../lib/scroll';
 
 /**
- * The detail tour. The half-zip sits on the studio backdrop and the scroll
- * works the camera: it pushes in on each detail, holds, then eases out,
+ * The feature tour. The analysis board sits on the backdrop and the scroll
+ * works the camera: it pushes in on each feature, holds, then eases out,
  * travels and eases back in to the next — a pull-back curve between every
  * stop. A reticle locks on at each stop, a leader line runs to the
  * close-up card, and the card crossfades.
@@ -134,9 +134,9 @@ export function Details() {
     <section ref={rootRef} id="details" aria-labelledby="details-title" className="relative bg-fog text-ink" style={{height: `${SECTION_VH}svh`}}>
       <div className="sticky top-0 h-screen-s overflow-hidden">
         <div ref={plateRef} className="absolute top-0 left-0 origin-top-left will-change-transform">
-          <img src={hero.image} alt="The Wellfleet ½ Zip, laid flat." width={IMG.w} height={IMG.h} decoding="async" className="block h-auto w-full" />
+          <img src={details.image} alt={details.imageAlt} width={IMG.w} height={IMG.h} decoding="async" className="block h-auto w-full" />
         </div>
-        <div ref={shadeRef} aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,transparent_50%,rgb(243_243_243/0.92)_74%)] max-md:bg-[linear-gradient(180deg,transparent_50%,rgb(243_243_243/0.95)_66%)]" />
+        <div ref={shadeRef} aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,transparent_50%,rgb(242_240_234/0.92)_74%)] max-md:bg-[linear-gradient(180deg,transparent_50%,rgb(242_240_234/0.95)_66%)]" />
 
         {/* Reticle. */}
         <div ref={reticleRef} aria-hidden="true" className="pointer-events-none absolute size-14" style={{opacity: 0}}>
@@ -153,13 +153,13 @@ export function Details() {
         {/* Heading. */}
         <div className="absolute top-[5.5rem] left-4 z-10 -ml-3 rounded-[8px] bg-fog/85 px-3 py-2 backdrop-blur-md sm:left-6 md:top-28 md:left-[4vw] md:-ml-4 md:px-4 md:py-3">
           <p className="font-mono text-label text-tide-deep uppercase">{details.eyebrow}</p>
-          <h2 id="details-title" className="wide mt-3 max-w-[16ch] font-display text-[clamp(1.5rem,2.8vw,2.75rem)] leading-none font-extralight uppercase [text-shadow:0_2px_24px_rgb(243_243_243/0.9)]">
+          <h2 id="details-title" className="wide mt-3 max-w-[16ch] font-display text-[clamp(1.5rem,2.8vw,2.75rem)] leading-none font-extralight uppercase [text-shadow:0_2px_24px_rgb(242_240_234/0.9)]">
             {details.heading}
           </h2>
         </div>
 
         {/* Close-up card. */}
-        <div ref={cardRef} className="absolute inset-x-4 bottom-20 sm:inset-x-6 md:inset-x-auto md:top-1/2 md:right-[4vw] md:bottom-auto md:w-[min(24rem,30vw)] md:-translate-y-1/2">
+        <div ref={cardRef} className="absolute inset-x-2 bottom-16 rounded-[8px] bg-fog/95 p-3 backdrop-blur-md sm:inset-x-4 md:inset-x-auto md:top-1/2 md:right-[4vw] md:bottom-auto md:w-[min(25rem,32vw)] md:-translate-y-1/2 md:p-5">
           <div key={item.id} className="animate-[fade-up_0.8s_cubic-bezier(0.2,0.7,0.1,1)]">
             <div className="flex items-baseline gap-4">
               <span className="wide font-display text-[clamp(3rem,6vw,5.5rem)] leading-none font-extralight text-transparent" style={{WebkitTextStroke: '1px var(--color-buoy)'}}>
@@ -168,7 +168,7 @@ export function Details() {
               <span className="font-mono text-label text-ink/50 uppercase">/ 0{n}</span>
             </div>
             <div className="mt-4 overflow-hidden rounded-[6px] max-md:hidden">
-              <img src={item.image} alt={item.title} width={900} height={900} decoding="async" className="aspect-[4/3] w-full animate-[settle_1.8s_cubic-bezier(0.2,0.7,0.1,1)] object-cover" />
+              <img src={item.image} alt={item.title} width={900} height={900} decoding="async" className="aspect-[4/3] w-full animate-[settle_1.8s_cubic-bezier(0.2,0.7,0.1,1)] bg-ink object-cover" />
             </div>
             <h3 className="wide mt-5 font-display text-[1.375rem] font-light uppercase md:text-[1.625rem]">{item.title}</h3>
             <p className="mt-2 text-body text-ink/75">{item.body}</p>

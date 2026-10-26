@@ -5,7 +5,7 @@ import {onFrame} from '../lib/scroll';
 import {CurveEdge} from './CurveEdge';
 
 /**
- * A day in the half-zip, as a dial. The section pins while the hand sweeps
+ * A training day with the app, as a dial. The section pins while the hand sweeps
  * from sunrise toward night with the scroll; each moment takes the centre
  * of the dial in turn and the clock runs up to it, the list beside it
  * follows, and a tide light comes on for every stop the hand has reached.
@@ -40,12 +40,12 @@ function Dial({needleRef, arcRef}: {needleRef: RefObject<SVGGElement | null>; ar
     const major = i % 8 === 0;
     const p1 = polar(major ? 150 : 158, a);
     const p2 = polar(168, a);
-    ticks.push(<line key={i} x1={p1.x} y1={p1.y} x2={p2.x} y2={p2.y} stroke={hour >= EVENING ? '#d75f36' : 'rgb(246 243 236 / 0.55)'} strokeWidth={major ? 2 : 1} />);
+    ticks.push(<line key={i} x1={p1.x} y1={p1.y} x2={p2.x} y2={p2.y} stroke={hour >= EVENING ? '#ffc400' : 'rgb(246 243 236 / 0.55)'} strokeWidth={major ? 2 : 1} />);
     if (major) {
       const t = polar(128, a);
       const c = clock(hour);
       ticks.push(
-        <text key={`t${i}`} x={t.x} y={t.y + 5} textAnchor="middle" fontFamily="Geist Mono, monospace" fontSize="13" fill={hour >= EVENING ? '#e8825d' : 'rgb(246 243 236 / 0.7)'}>
+        <text key={`t${i}`} x={t.x} y={t.y + 5} textAnchor="middle" fontFamily="Geist Mono, monospace" fontSize="13" fill={hour >= EVENING ? '#ffd21f' : 'rgb(246 243 236 / 0.7)'}>
           {c.time.replace(':00', '')}
           {c.ap[0]}
         </text>,
@@ -57,21 +57,21 @@ function Dial({needleRef, arcRef}: {needleRef: RefObject<SVGGElement | null>; ar
   const s0 = polar(176, angleFor(day.start));
   return (
     <svg viewBox="0 0 400 400" className="size-full" aria-hidden="true">
-      <circle cx="200" cy="200" r="194" fill="#121831" stroke="rgb(143 193 181 / 0.5)" strokeWidth="1.5" />
+      <circle cx="200" cy="200" r="194" fill="#111114" stroke="rgb(255 210 31 / 0.45)" strokeWidth="1.5" />
       <circle cx="200" cy="200" r="186" fill="none" stroke="rgb(246 243 236 / 0.08)" />
-      {/* Sunset zone. */}
-      <path d={`M${r0.x} ${r0.y} A176 176 0 0 1 ${r1.x} ${r1.y}`} fill="none" stroke="#d75f36" strokeWidth="6" />
+      {/* Evening zone: training time. */}
+      <path d={`M${r0.x} ${r0.y} A176 176 0 0 1 ${r1.x} ${r1.y}`} fill="none" stroke="#ffc400" strokeWidth="6" />
       {/* Trail that fills behind the hand. */}
       <path ref={arcRef} d={`M${s0.x} ${s0.y} A176 176 0 1 1 ${r1.x} ${r1.y}`} pathLength={1} fill="none" stroke="var(--color-tide)" strokeWidth="2" strokeDasharray="1 1" strokeDashoffset="1" opacity="0.9" />
       {ticks}
       <text x="200" y="352" textAnchor="middle" fontFamily="Geist Mono, monospace" fontSize="11" letterSpacing="3" fill="rgb(246 243 236 / 0.45)">
-        CAPE COD · EDT
+        {day.dialLabel}
       </text>
       <g ref={needleRef} style={{transformOrigin: '200px 200px'}}>
         <line x1="200" y1="200" x2="200" y2="48" stroke="#f6f3ec" strokeWidth="3" strokeLinecap="round" />
         <line x1="200" y1="200" x2="200" y2="232" stroke="#f6f3ec" strokeWidth="5" strokeLinecap="round" />
       </g>
-      <circle cx="200" cy="200" r="13" fill="#1c2440" stroke="var(--color-tide)" strokeWidth="1.5" />
+      <circle cx="200" cy="200" r="13" fill="#17171b" stroke="var(--color-tide)" strokeWidth="1.5" />
     </svg>
   );
 }

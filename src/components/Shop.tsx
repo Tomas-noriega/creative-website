@@ -7,14 +7,14 @@ import {onFrame} from '../lib/scroll';
 import {CurveEdge} from './CurveEdge';
 
 /**
- * Find your fit, then shop. The linen from the hero returns as the
- * background; a two-question size finder answers on the spot (nothing is
- * sent anywhere) and the call to action goes to the product page.
+ * Find your plan, then join the waitlist. The section turns brand yellow;
+ * a two-question plan finder answers on the spot (nothing is sent
+ * anywhere) and the call to action opens an email to join the waitlist.
  */
 export function Shop() {
   const ref = useReveals<HTMLElement>();
-  const [size, setSize] = useState(2);
-  const [fit, setFit] = useState(0);
+  const [level, setLevel] = useState(1);
+  const [goal, setGoal] = useState(0);
   const markRef = useFitText<HTMLSpanElement>();
   const letterRefs = useRef<HTMLSpanElement[]>([]);
 
@@ -38,17 +38,12 @@ export function Shop() {
     });
   }, [markRef]);
 
-  // The cut is relaxed: trim wearers size down one, everyone else stays put.
-  const pick = shop.sizes[fit === 1 ? Math.max(0, size - 1) : size];
-  const advice =
-    fit === 1 && size > 0
-      ? `Go one down: order the ${pick} for a trim line under a jacket.`
-      : `Order your usual ${pick}: the relaxed cut sits easily over a tee.`;
+  const plan = shop.plans[level][goal];
 
   return (
     <section ref={ref} id="shop" aria-labelledby="shop-title" className="relative bg-sand px-4 pt-24 pb-8 text-ink sm:px-6 md:px-[4vw] md:pt-36">
       <CurveEdge color="var(--color-sand)" />
-      {/* Linen weave. */}
+      {/* Knurling: the cross-hatch on a barbell grip. */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 opacity-40"
@@ -59,22 +54,22 @@ export function Shop() {
       />
       <div className="relative grid gap-12 md:grid-cols-12 md:gap-10">
         <div className="md:col-span-5" data-reveal>
-          <p className="font-mono text-label text-tide-deep uppercase">{shop.eyebrow}</p>
+          <p className="font-mono text-label text-ink/70 uppercase">{shop.eyebrow}</p>
           <h2 id="shop-title" className="mt-4 text-display font-extralight uppercase">
             <span className="wide block font-display">{shop.heading[0]}</span>
             <span className="block font-serif text-buoy-deep normal-case italic">{shop.heading[1]}</span>
           </h2>
-          <p className="mt-6 max-w-[26rem] text-body text-ink/70">{shop.body}</p>
+          <p className="mt-6 max-w-[26rem] text-body text-ink/80">{shop.body}</p>
         </div>
 
         <div className="space-y-6 md:col-span-6 md:col-start-7" data-reveal>
           <fieldset>
-            <legend className="font-mono text-label text-ink/55 uppercase">Your usual size</legend>
+            <legend className="font-mono text-label text-ink/70 uppercase">Where you are now</legend>
             <div className="mt-3 flex flex-wrap gap-2">
-              {shop.sizes.map((s, i) => (
+              {shop.levels.map((s, i) => (
                 <label key={s} className="cursor-pointer">
-                  <input type="radio" name="size" value={s} checked={size === i} onChange={() => setSize(i)} className="peer sr-only" />
-                  <span className="block min-w-[3.25rem] rounded-full px-4 py-2 text-center text-[0.875rem] ring-1 ring-ink/25 transition-colors peer-checked:bg-ink peer-checked:text-sand peer-checked:ring-ink peer-focus-visible:outline peer-focus-visible:outline-buoy">
+                  <input type="radio" name="level" value={s} checked={level === i} onChange={() => setLevel(i)} className="peer sr-only" />
+                  <span className="block min-w-[3.25rem] rounded-full px-4 py-2 text-center text-[0.875rem] ring-1 ring-ink/35 transition-colors peer-checked:bg-ink peer-checked:text-sand peer-checked:ring-ink peer-focus-visible:outline peer-focus-visible:outline-ink">
                     {s}
                   </span>
                 </label>
@@ -82,12 +77,12 @@ export function Shop() {
             </div>
           </fieldset>
           <fieldset>
-            <legend className="font-mono text-label text-ink/55 uppercase">How you wear a layer</legend>
+            <legend className="font-mono text-label text-ink/70 uppercase">What you’re chasing</legend>
             <div className="mt-3 flex flex-wrap gap-2">
-              {shop.fits.map((f, i) => (
+              {shop.goals.map((f, i) => (
                 <label key={f} className="cursor-pointer">
-                  <input type="radio" name="fit" value={f} checked={fit === i} onChange={() => setFit(i)} className="peer sr-only" />
-                  <span className="block rounded-full px-4 py-2 text-[0.875rem] ring-1 ring-ink/25 transition-colors peer-checked:bg-ink peer-checked:text-sand peer-checked:ring-ink peer-focus-visible:outline peer-focus-visible:outline-buoy">
+                  <input type="radio" name="goal" value={f} checked={goal === i} onChange={() => setGoal(i)} className="peer sr-only" />
+                  <span className="block rounded-full px-4 py-2 text-[0.875rem] ring-1 ring-ink/35 transition-colors peer-checked:bg-ink peer-checked:text-sand peer-checked:ring-ink peer-focus-visible:outline peer-focus-visible:outline-ink">
                     {f}
                   </span>
                 </label>
@@ -95,23 +90,23 @@ export function Shop() {
             </div>
           </fieldset>
           <div role="status" className="border-t border-ink/15 pt-5">
-            <p className="font-mono text-label text-ink/55 uppercase">We’d put you in</p>
+            <p className="font-mono text-label text-ink/70 uppercase">Your Reel Lifts plan</p>
             <p className="mt-2 flex items-baseline gap-4">
-              <span className="wide font-display text-[clamp(2.5rem,5vw,4rem)] leading-none font-extralight">{pick}</span>
-              <span className="text-body text-ink/70">{advice}</span>
+              <span className="wide font-display text-[clamp(2.5rem,5vw,4rem)] leading-none font-extralight">{plan.name}</span>
+              <span key={`${level}-${goal}`} className="animate-[fade-up_0.6s_cubic-bezier(0.2,0.7,0.1,1)] text-body text-ink/80">
+                {plan.advice}
+              </span>
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-5 pt-2">
             <a
-              href={brand.shopUrl}
-              target="_blank"
-              rel="noopener"
-              className="group flex items-center gap-3 rounded-full bg-buoy-deep px-7 py-4 font-mono text-label text-chalk uppercase transition-colors hover:bg-ink"
+              href={brand.ctaUrl}
+              className="group flex items-center gap-3 rounded-full bg-ink px-7 py-4 font-mono text-label text-chalk uppercase transition-colors hover:bg-chalk hover:text-ink"
             >
-              Shop the Wellfleet ½ Zip — {brand.price}
+              {brand.cta} — {plan.name} plan
               <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">→</span>
             </a>
-            <span className="font-mono text-label text-ink/60 uppercase">Free shipping &amp; returns at relaunch</span>
+            <span className="font-mono text-label text-ink/70 uppercase">{shop.note}</span>
           </div>
         </div>
       </div>
@@ -128,7 +123,7 @@ export function Shop() {
                 className="inline-block origin-bottom-left will-change-transform"
                 style={{transform: 'translate3d(0,105%,0)'}}
               >
-                {ch}
+                {ch === ' ' ? '\u00a0' : ch}
               </span>
             </span>
           ))}

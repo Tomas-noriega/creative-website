@@ -7,7 +7,7 @@ import {CurveEdge} from './CurveEdge';
 import {Marquee} from './Marquee';
 
 /**
- * The relaunch. Each change arrives under its own linen dust sheet, and the
+ * Why now. Each figure arrives under its own gym towel, and the
  * scroll pulls it off — the sheet lifts at one corner, skews, and slides
  * away with its folds catching the light, the way the hero opened. The
  * picture underneath settles from a slight zoom and the figure rises in.
@@ -46,7 +46,7 @@ export function Relaunch() {
   return (
     <section ref={ref} id="relaunch" aria-labelledby="relaunch-title" className="relative bg-ink pb-24 md:pb-36">
       <CurveEdge color="var(--color-ink)" />
-      <Marquee text="Office · Ocean · Wellfleet · Cape Cod · " />
+      <Marquee text={relaunch.marquee} />
 
       <div className="px-4 sm:px-6 md:px-[4vw]" data-reveal>
         <p className="font-mono text-label text-tide uppercase">{relaunch.eyebrow}</p>
@@ -80,7 +80,7 @@ export function Relaunch() {
                 style={{transform: 'scale(1.28)'}}
               />
               <div className="absolute inset-0 bg-linear-to-t from-ink/80 via-transparent to-transparent" />
-              {/* The dust sheet: linen with folds catching a top light. */}
+              {/* The cover: a black gym towel with folds catching a top light. */}
               <div
                 ref={(el) => {
                   if (el) sheetRefs.current[i] = el;
@@ -89,7 +89,7 @@ export function Relaunch() {
                 className={`absolute -inset-[8%] will-change-transform ${i % 2 ? 'origin-top-right' : 'origin-top-left'}`}
                 style={{
                   background:
-                    'repeating-linear-gradient(97deg, rgb(0 0 0 / 0) 0 38px, rgb(0 0 0 / 0.1) 52px, rgb(255 255 255 / 0.18) 64px, rgb(0 0 0 / 0) 86px), repeating-linear-gradient(3deg, rgb(0 0 0 / 0.035) 0 1px, transparent 1px 3px), linear-gradient(170deg, #efe7d6, #d9ccb3 60%, #c8b99c)',
+                    'repeating-linear-gradient(97deg, rgb(0 0 0 / 0) 0 38px, rgb(0 0 0 / 0.35) 52px, rgb(255 210 31 / 0.08) 64px, rgb(0 0 0 / 0) 86px), repeating-linear-gradient(3deg, rgb(255 255 255 / 0.03) 0 1px, transparent 1px 3px), linear-gradient(170deg, #2b2b30, #1c1c20 60%, #111114)',
                   boxShadow: '0 30px 80px rgb(0 0 0 / 0.5)',
                 }}
               />

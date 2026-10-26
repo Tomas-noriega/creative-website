@@ -4,14 +4,14 @@ import {clamp, easeOutCubic, lerp, pinProgress, range, smoothstep} from '../lib/
 import {onFrame, scrollToY} from '../lib/scroll';
 
 /**
- * The unveiling. The half-zip sits under a linen dust sheet on the studio
- * backdrop; the scroll (or the handle) pulls the sheet off one corner, it
+ * The unveiling. The app sits under a black gym towel on a chalk-white
+ * backdrop; the scroll (or the handle) pulls the cover off one corner, it
  * skews and slides away, and the title card hands over to the name plate.
  *
- *   0.00 – 0.06  title card: MADE FOR THE Cape morning, the handle
- *   0.06 – 0.50  the sheet comes off
+ *   0.00 – 0.06  title card: NO GUESSWORK. Just PRs., the handle
+ *   0.06 – 0.50  the cover comes off
  *   0.45 – 0.55  title card clears
- *   0.55 – 0.85  name plate: GOOGLE WELLFLEET WOMEN’S ½ ZIP, $79, the slogan
+ *   0.55 – 0.85  name plate: REEL LIFTS, AI LIFT + MEAL COACH, the slogan
  */
 
 const STAGE_VH = 320;
@@ -30,6 +30,11 @@ export function Unveil() {
   const [copied, setCopied] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const dragging = useRef(false);
+
+  // A cached photo can finish loading before React attaches onLoad.
+  useEffect(() => {
+    if (imgRef.current?.complete) setLoaded(true);
+  }, []);
 
   useEffect(() => {
     let lastP = -1;
@@ -61,7 +66,7 @@ export function Unveil() {
       introRef.current!.style.transform = `translate3d(${-out * 60}px, 0, 0)`;
       introRef.current!.style.filter = out > 0.01 ? `blur(${out * 10}px)` : '';
 
-      // --- Name plate: each line slides in out of a blur, the price drifts. ---
+      // --- Name plate: each line slides in out of a blur, the big PR drifts. ---
       const plate = range(p, 0.55, 0.85);
       plateRef.current!.style.opacity = String(plate > 0 ? 1 : 0);
       plateRef.current!.style.pointerEvents = plate > 0.5 ? 'auto' : 'none';
@@ -135,24 +140,24 @@ export function Unveil() {
             <img
               ref={imgRef}
               src={hero.image}
-              alt="The Google Wellfleet Women’s ½ Zip in navy, laid flat."
-              width={1500}
-              height={1500}
+              alt={hero.imageAlt}
+              width={1024}
+              height={1024}
               decoding="async"
               fetchPriority="high"
               onLoad={() => setLoaded(true)}
               className="size-full object-cover will-change-transform"
               style={{transform: 'scale(1.16)', visibility: 'hidden'}}
             />
-            {/* The dust sheet: linen with folds catching a window light. */}
+            {/* The cover: a black gym towel with folds catching the light. */}
             <div
               ref={sheetRef}
               aria-hidden="true"
               className="absolute -inset-[8%] origin-top-left will-change-transform"
               style={{
                 background:
-                  'repeating-linear-gradient(97deg, rgb(0 0 0 / 0) 0 38px, rgb(0 0 0 / 0.08) 52px, rgb(255 255 255 / 0.22) 64px, rgb(0 0 0 / 0) 86px), repeating-linear-gradient(3deg, rgb(0 0 0 / 0.03) 0 1px, transparent 1px 3px), linear-gradient(170deg, #f4efe4, #e3d8c2 60%, #d4c6aa)',
-                boxShadow: '0 30px 80px rgb(21 27 48 / 0.35)',
+                  'repeating-linear-gradient(97deg, rgb(0 0 0 / 0) 0 38px, rgb(0 0 0 / 0.35) 52px, rgb(255 255 255 / 0.07) 64px, rgb(0 0 0 / 0) 86px), repeating-linear-gradient(3deg, rgb(255 255 255 / 0.03) 0 1px, transparent 1px 3px), linear-gradient(170deg, #2b2b30, #1c1c20 60%, #111114)',
+                boxShadow: '0 30px 80px rgb(0 0 0 / 0.45)',
               }}
             />
           </div>
@@ -164,29 +169,38 @@ export function Unveil() {
               if (e.detail === 0) playReveal(); // keyboard activation only
             }}
             className="group absolute bottom-[12%] left-[8%] z-20 flex cursor-grab touch-none items-center gap-3 active:cursor-grabbing"
-            aria-label="Reveal the half-zip"
+            aria-label="Reveal the app"
           >
             <span className="relative grid size-5 place-items-center">
               <span className="absolute inset-0 animate-ping rounded-full bg-buoy/40 motion-reduce:animate-none" />
               <span className="size-2.5 rounded-full bg-buoy shadow-[0_0_16px_rgb(215_95_54/0.7)] transition-transform group-hover:scale-150" />
             </span>
-            <span className="font-mono text-[0.625rem] tracking-[0.18em] whitespace-nowrap text-ink/80 uppercase">{hero.handle} →</span>
+            <span className="font-mono text-[0.625rem] tracking-[0.18em] whitespace-nowrap text-chalk/85 uppercase">{hero.handle} →</span>
           </button>
         </div>
 
         {/* Title card — letters rise in once the photo is ready. */}
         <div ref={introRef} className="pointer-events-none absolute inset-x-4 top-[14svh] sm:inset-x-6 md:top-[24svh] md:right-auto md:left-[4vw] md:max-w-[44vw]">
-          <h1 className="text-hero font-extralight uppercase" aria-label={`${hero.title[0]} ${hero.title[1]}`}>
+          <h1 className="text-[clamp(2.25rem,4.6vw,5.75rem)] leading-[0.92] font-extralight tracking-[-0.02em] uppercase" aria-label={`${hero.title[0]} ${hero.title[1]}`}>
             <span className="wide block font-display" aria-hidden="true">
-              {[...hero.title[0]].map((ch, i) => (
-                <span
-                  key={i}
-                  className={`inline-block ${loaded ? 'animate-[letter-in_1.4s_cubic-bezier(0.2,0.7,0.1,1)_both]' : 'opacity-0'}`}
-                  style={{animationDelay: `${0.2 + i * 0.04}s`}}
-                >
-                  {ch === ' ' ? ' ' : ch}
-                </span>
-              ))}
+              {/* Letters animate one by one, but lines only break between words. */}
+              {hero.title[0].split(' ').map((word, w, words) => {
+                const offset = words.slice(0, w).join(' ').length + (w ? 1 : 0);
+                return (
+                  <span key={w} className="inline-block whitespace-nowrap">
+                    {[...word].map((ch, i) => (
+                      <span
+                        key={i}
+                        className={`inline-block ${loaded ? 'animate-[letter-in_1.4s_cubic-bezier(0.2,0.7,0.1,1)_both]' : 'opacity-0'}`}
+                        style={{animationDelay: `${0.2 + (offset + i) * 0.04}s`}}
+                      >
+                        {ch}
+                      </span>
+                    ))}
+                    {w < words.length - 1 ? '\u00a0' : null}
+                  </span>
+                );
+              })}
             </span>
             <span aria-hidden="true" className={`block text-tide-deep ${loaded ? 'animate-[fade-up_1.4s_cubic-bezier(0.2,0.7,0.1,1)_both] [animation-delay:0.8s]' : 'opacity-0'}`}>
               <span className="font-serif normal-case italic">{hero.title[1]}</span>
@@ -231,12 +245,10 @@ export function Unveil() {
             >
               <p className="max-w-[24rem] text-[0.9375rem] leading-relaxed text-ink/70">{hero.note}</p>
               <a
-                href={brand.shopUrl}
-                target="_blank"
-                rel="noopener"
-                className="group mt-6 inline-flex items-center gap-3 rounded-full bg-ink px-7 py-4 font-mono text-label text-chalk uppercase transition-colors hover:bg-buoy-deep"
+                href={brand.ctaUrl}
+                className="group mt-6 inline-flex items-center gap-3 rounded-full bg-ink px-7 py-4 font-mono text-label text-chalk uppercase transition-colors hover:bg-buoy hover:text-ink"
               >
-                Shop it — {brand.price}
+                {brand.cta}
                 <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">→</span>
               </a>
             </div>
@@ -244,10 +256,10 @@ export function Unveil() {
           <span
             ref={priceRef}
             aria-hidden="true"
-            className="wide absolute right-4 bottom-[6svh] font-display text-[clamp(3.5rem,10vw,10rem)] leading-none font-extralight text-transparent sm:right-6 md:top-[6svh] md:right-[4vw] md:bottom-auto"
-            style={{WebkitTextStroke: '1px rgb(215 95 54 / 0.85)'}}
+            className="wide absolute right-4 bottom-[6svh] font-display text-[clamp(3.5rem,10vw,10rem)] leading-none font-extralight text-transparent sm:right-6 md:right-[4vw] md:bottom-[9svh]"
+            style={{WebkitTextStroke: '1.5px rgb(14 14 16 / 0.85)'}}
           >
-            {brand.price}
+            {brand.big}
           </span>
         </div>
 
