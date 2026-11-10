@@ -3,7 +3,7 @@
   "projectName": "Reel Lifts",
   "modelName": "Reel Lifts icon sculpture",
   "modelType": "Brand symbol",
-  "confirmedAt": "2026-11-10T19:10:12.108Z",
+  "confirmedAt": "2026-11-10T19:29:30.155Z",
   "dimensions": {
     "width": 19.4,
     "height": 20.1,
@@ -54,7 +54,7 @@
   },
   "integrity": {
     "algorithm": "SHA-256",
-    "modelChecksum": "adefdc00cd41b6720616c28ba7f797381d5ad5453f5ecef2e318621c32f4c8a0",
-    "modelBytes": 4760580
+    "modelChecksum": "9ed2d800515b0cdfc35177852034211769244307b2529210d9d9c7f7a7a3a86f",
+    "modelBytes": 4768132
   }
 }
