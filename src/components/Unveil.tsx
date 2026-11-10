@@ -2,10 +2,13 @@ import {useEffect, useRef, useState, type PointerEvent as ReactPointerEvent} fro
 import {brand, hero} from '../content';
 import {clamp, easeOutCubic, lerp, pinProgress, range, smoothstep} from '../lib/math';
 import {onFrame, scrollToY} from '../lib/scroll';
+import type {Stage} from '../lib/reelModel';
+import {useReducedMotion} from '../hooks/useReducedMotion';
+import {ModelStage} from './ModelStage';
 
 /**
- * The unveiling. The app sits under a black gym towel on a chalk-white
- * backdrop; the scroll (or the handle) pulls the cover off one corner, it
+ * The unveiling. The confirmed 3D Reel Lifts sculpture (Mission 2) sits
+ * under a black gym towel on a chalk-white backdrop; the scroll (or the handle) pulls the cover off one corner, it
  * skews and slides away, and the title card hands over to the name plate.
  *
  *   0.00 – 0.06  title card: NO GUESSWORK. Just PRs., the handle
@@ -21,7 +24,9 @@ export function Unveil() {
   const rootRef = useRef<HTMLElement>(null);
   const frameRef = useRef<HTMLDivElement>(null);
   const sheetRef = useRef<HTMLDivElement>(null);
-  const imgRef = useRef<HTMLImageElement>(null);
+  const stageWrapRef = useRef<HTMLDivElement>(null);
+  const stageApi = useRef<Stage | null>(null);
+  const reduced = useReducedMotion();
   const introRef = useRef<HTMLDivElement>(null);
   const handleRef = useRef<HTMLButtonElement>(null);
   const plateRef = useRef<HTMLDivElement>(null);
@@ -30,11 +35,6 @@ export function Unveil() {
   const [copied, setCopied] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const dragging = useRef(false);
-
-  // A cached photo can finish loading before React attaches onLoad.
-  useEffect(() => {
-    if (imgRef.current?.complete) setLoaded(true);
-  }, []);
 
   useEffect(() => {
     let lastP = -1;
@@ -50,9 +50,14 @@ export function Unveil() {
       const pull = smoothstep(range(p, ...PULL));
       sheetRef.current!.style.transform = `translate3d(${pull * 112}%, ${-pull * 34}%, 0) rotate(${pull * 10}deg) skewX(${-pull * 14}deg)`;
       sheetRef.current!.style.opacity = String(1 - smoothstep(clamp((pull - 0.75) / 0.25)));
-      imgRef.current!.style.transform = `scale(${lerp(1.16, 1, easeOutCubic(pull))})`;
-      // Hidden while fully covered, so no navy fringe shows at the clipped edge.
-      imgRef.current!.style.visibility = pull > 0.001 ? 'visible' : 'hidden';
+      stageWrapRef.current!.style.transform = `scale(${lerp(1.16, 1, easeOutCubic(pull))})`;
+      stageApi.current?.setReveal(pull);
+      // The 3D controls appear once the cover is off.
+      const ui = smoothstep(range(pull, 0.85, 1));
+      stageWrapRef.current!.querySelectorAll<HTMLElement>('[data-model-ui]').forEach((el) => {
+        el.style.opacity = String(ui);
+        el.style.visibility = ui > 0.02 ? 'visible' : 'hidden';
+      });
 
       // --- The handle rides the sheet's leading corner. ---
       const vis = 1 - range(p, 0.3, 0.42);
@@ -137,23 +142,15 @@ export function Unveil() {
           className="absolute top-[40svh] left-1/2 aspect-square w-[min(88vw,52svh)] -translate-x-1/2 md:top-1/2 md:right-[5vw] md:left-auto md:w-[min(46vw,80svh)] md:translate-x-0 md:-translate-y-1/2"
         >
           <div className="relative size-full overflow-hidden rounded-[10px] bg-fog">
-            <img
-              ref={imgRef}
-              src={hero.image}
-              alt={hero.imageAlt}
-              width={1024}
-              height={1024}
-              decoding="async"
-              fetchPriority="high"
-              onLoad={() => setLoaded(true)}
-              className="size-full object-cover will-change-transform"
-              style={{transform: 'scale(1.16)', visibility: 'hidden'}}
-            />
+            {/* The confirmed Mission 2 model, live in 3D (was the static icon.jpg). */}
+            <div ref={stageWrapRef} className="size-full will-change-transform" style={{transform: 'scale(1.16)'}}>
+              <ModelStage apiRef={stageApi} reducedMotion={reduced} onReady={() => setLoaded(true)} />
+            </div>
             {/* The cover: a black gym towel with folds catching the light. */}
             <div
               ref={sheetRef}
               aria-hidden="true"
-              className="absolute -inset-[8%] origin-top-left will-change-transform"
+              className="pointer-events-none absolute -inset-[8%] origin-top-left will-change-transform"
               style={{
                 background:
                   'repeating-linear-gradient(97deg, rgb(0 0 0 / 0) 0 38px, rgb(0 0 0 / 0.35) 52px, rgb(255 255 255 / 0.07) 64px, rgb(0 0 0 / 0) 86px), repeating-linear-gradient(3deg, rgb(255 255 255 / 0.03) 0 1px, transparent 1px 3px), linear-gradient(170deg, #2b2b30, #1c1c20 60%, #111114)',
