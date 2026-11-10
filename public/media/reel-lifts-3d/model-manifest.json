@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "1.0",
+  "projectName": "Reel Lifts",
+  "modelName": "Reel Lifts icon sculpture",
+  "modelType": "Brand symbol",
+  "confirmedAt": "2026-11-10T19:10:12.108Z",
+  "dimensions": {
+    "width": 19.4,
+    "height": 20.1,
+    "depth": 4.4,
+    "units": "cm"
+  },
+  "camera": {
+    "position": [
+      0,
+      1.7145055188062944e-15,
+      28
+    ],
+    "target": [
+      0,
+      0,
+      0
+    ],
+    "type": "perspective"
+  },
+  "background": "#0c0b09",
+  "lighting": "Gold rim",
+  "description": "Reel Lifts is an iOS app that films top sets and meal photos, then uses AI to build lifting and eating plans. No guesswork. Just PRs.",
+  "hotspots": [
+    {
+      "name": "Glowing rim",
+      "description": "App icon frame that makes the brand recognizable",
+      "position": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "Male lifter",
+      "description": "Lifters film their heaviest sets on their phones",
+      "position": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "files": {
+    "model": "model.glb",
+    "project": "project.json",
+    "preview": "preview.png",
+    "readme": "README.txt"
+  },
+  "integrity": {
+    "algorithm": "SHA-256",
+    "modelChecksum": "adefdc00cd41b6720616c28ba7f797381d5ad5453f5ecef2e318621c32f4c8a0",
+    "modelBytes": 4760580
+  }
+}
