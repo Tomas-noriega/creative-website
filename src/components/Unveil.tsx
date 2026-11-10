@@ -132,7 +132,7 @@ export function Unveil() {
 
   return (
     <section id="top" ref={rootRef} aria-label="The unveiling" className="relative" style={{height: `${STAGE_VH}svh`}}>
-      <div className="sticky top-0 h-screen-s overflow-hidden bg-fog text-ink">
+      <div className="sticky top-0 h-screen-s overflow-clip bg-fog text-ink">
         {/* A soft window light falling across the backdrop. */}
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(70%_60%_at_70%_40%,rgb(255_255_255/0.9),transparent_70%)]" />
 
@@ -141,7 +141,7 @@ export function Unveil() {
           ref={frameRef}
           className="absolute top-[40svh] left-1/2 aspect-square w-[min(88vw,52svh)] -translate-x-1/2 md:top-1/2 md:right-[5vw] md:left-auto md:w-[min(46vw,80svh)] md:translate-x-0 md:-translate-y-1/2"
         >
-          <div className="relative size-full overflow-hidden rounded-[10px] bg-fog">
+          <div className="relative size-full overflow-clip rounded-[10px] bg-fog">
             {/* The confirmed Mission 2 model, live in 3D (was the static icon.jpg). */}
             <div ref={stageWrapRef} className="size-full will-change-transform" style={{transform: 'scale(1.16)'}}>
               <ModelStage apiRef={stageApi} reducedMotion={reduced} onReady={() => setLoaded(true)} />

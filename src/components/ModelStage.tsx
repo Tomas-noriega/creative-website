@@ -151,7 +151,7 @@ export function ModelStage({
       )}
 
       {/* Feature hotspots, placed on the parts they describe. */}
-      <div data-model-ui className="pointer-events-none absolute inset-0">
+      <div data-model-ui className="pointer-events-none absolute inset-0 overflow-clip">
         {FEATURES.map((f, i) => (
           <button
             key={f.id}
