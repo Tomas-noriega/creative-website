@@ -2,6 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <!-- Three.js for the 3D hero, loaded at runtime (see src/lib/reelModel.ts). Must come before any module script. -->
+    <script type="importmap">
+      {"imports": {"three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"}}
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0e0e10" />
     <title>Reel Lifts — No guesswork. Just PRs.</title>
@@ -22,7 +26,6 @@
     />
     <link rel="icon" type="image/png" href="/media/favicon.png" />
     <link rel="apple-touch-icon" href="/media/favicon.png" />
-    <link rel="preload" as="image" href="/media/icon.jpg" fetchpriority="high" />
   </head>
   <body>
     <div id="root"></div>
