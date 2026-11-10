@@ -154,7 +154,7 @@ export async function createStage(mount: HTMLElement, opts: {reducedMotion: bool
   const dir = new THREE.Vector3(...(manifest.camera?.position ?? [0, 0, 1])).sub(new THREE.Vector3(...(manifest.camera?.target ?? [0, 0, 0])));
   if (dir.lengthSq() < 1e-6) dir.set(0, 0, 1);
   dir.normalize();
-  const fit = (Math.max(size.x, size.y) / 2 / Math.tan((camera.fov * Math.PI) / 360)) * 1.18;
+  const fit = (Math.max(size.x, size.y) / 2 / Math.tan((camera.fov * Math.PI) / 360)) * 1.3;
   const zoomLimits = [fit * 0.55, fit * 1.35];
   let dist = fit;
   let wantDist = fit;
@@ -178,7 +178,7 @@ export async function createStage(mount: HTMLElement, opts: {reducedMotion: bool
 
   // Orientation: yaw/pitch of the model, eased toward a target.
   const REST = {yaw: 0, pitch: 0};
-  let yaw = 0.35;
+  let yaw = 0.3;
   let pitch = 0;
   let want = {...REST};
   let lastTouch = 0;
@@ -204,7 +204,7 @@ export async function createStage(mount: HTMLElement, opts: {reducedMotion: bool
     raf = requestAnimationFrame(tick);
     if (!active) return;
     const idle = !opts.reducedMotion && !focusId && performance.now() - lastTouch > 4000;
-    const sway = idle ? Math.sin(t / 2600) * 0.32 : 0;
+    const sway = idle ? Math.sin(t / 2600) * 0.22 : 0;
     const k = opts.reducedMotion ? 1 : 0.08;
     yaw += (want.yaw + sway - yaw) * k;
     pitch += (want.pitch - pitch) * k;
@@ -231,7 +231,7 @@ export async function createStage(mount: HTMLElement, opts: {reducedMotion: bool
           continue;
         }
         a.getWorldPosition(v);
-        const facing = v.clone().sub(camera.position).dot(new THREE.Vector3().copy(dir).negate()) > 0 && Math.abs(Math.sin(yaw)) < 0.75;
+        const facing = Math.cos(yaw) > 0.45 && Math.cos(pitch) > 0.8;
         v.project(camera);
         out[f.id] = facing ? {x: ((v.x + 1) / 2) * mount.clientWidth, y: ((1 - v.y) / 2) * mount.clientHeight} : null;
       }
@@ -240,7 +240,9 @@ export async function createStage(mount: HTMLElement, opts: {reducedMotion: bool
     rotateBy(dx, dy) {
       lastTouch = performance.now();
       focusId = null;
-      want = {yaw: want.yaw + dx * 0.008, pitch: Math.max(-0.45, Math.min(0.45, want.pitch + dy * 0.005))};
+      // The lifters are raised surfaces shaped from the concept image, so they read
+      // best from the front; keep turns within about 35 degrees either way.
+      want = {yaw: Math.max(-0.6, Math.min(0.6, want.yaw + dx * 0.006)), pitch: Math.max(-0.25, Math.min(0.25, want.pitch + dy * 0.004))};
     },
     zoom(step) {
       lastTouch = performance.now();
