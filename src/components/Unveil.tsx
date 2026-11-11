@@ -14,7 +14,7 @@ import {ModelStage} from './ModelStage';
  *   0.00 – 0.06  title card: NO GUESSWORK. Just PRs., the handle
  *   0.06 – 0.50  the cover comes off
  *   0.45 – 0.55  title card clears
- *   0.55 – 0.85  name plate: REEL LIFTS, AI LIFT + MEAL COACH, the slogan
+ *   0.55 – 0.85  name plate: REEL LIFTS, A COACH IN YOUR CAMERA, the slogan
  */
 
 const STAGE_VH = 320;
