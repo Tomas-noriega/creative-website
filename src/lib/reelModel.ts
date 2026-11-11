@@ -35,8 +35,8 @@ export type Feature = {id: string; mesh: string; title: string; body: string; at
 
 /** The two hotspots in the confirmed manifest, anchored to the parts they describe. */
 export const FEATURES: Feature[] = [
-  {id: 'rim', mesh: 'Glowing rim', title: 'The icon frame', body: 'App icon frame that makes the brand recognizable.', at: 'top'},
-  {id: 'lifter', mesh: 'Male lifter', title: 'Film the top set', body: 'Lifters film their heaviest sets on their phones.', at: 'upper'},
+  {id: 'rim', mesh: 'Glowing rim', title: 'The icon frame', body: 'The camera frame from the Reel Lifts app icon.', at: 'top'},
+  {id: 'lifter', mesh: 'Male lifter', title: 'Record a reel', body: 'Film a set and the app tracks the bar or your body, rep by rep.', at: 'upper'},
 ];
 
 export function hasWebGL(): boolean {
