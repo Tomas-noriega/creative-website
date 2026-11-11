@@ -1,4 +1,5 @@
 import {useEffect} from 'react';
+import {AppInfo} from './components/AppInfo';
 import {Footer, Header} from './components/Chrome';
 import {Day} from './components/Day';
 import {Details} from './components/Details';
@@ -20,6 +21,7 @@ export default function App() {
         <Details />
         <Day />
         <Relaunch />
+        <AppInfo />
         <Shop />
       </main>
       <Footer />
